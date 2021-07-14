@@ -1,5 +1,6 @@
 const grid = document.getElementById("sketch-grid");
 const length = 64;
+const eraseBtn = document.getElementById("erase");
 
 // key to press to temporarily disable drawing
 const STOP_KEY = "Space";
@@ -77,6 +78,18 @@ function stopDrawing(){
         }
     });
 }
+
+// remove cell hover
+function eraseGrid(){
+    document.querySelectorAll('.cell').forEach((cell)=>{
+        if(cell.classList.contains('cell-hover')){
+            cell.classList.remove('cell-hover');
+        }
+    });
+}
+
+eraseBtn.addEventListener('click', eraseGrid);
+
 
 
 
