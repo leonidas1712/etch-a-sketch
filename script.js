@@ -4,8 +4,6 @@ let length = 16;
 const defaultColor = getComputedStyle(document.body).getPropertyValue("--default-color");
 let brushColor = "hsl(202, 75%, 79%)";
 
-
-//const eraseBtn = document.getElementById("erase");
 const setLengthBtn = document.getElementById("set-length");
 
 
@@ -26,7 +24,6 @@ function eraseCell(cell){
 // mouseover event listener
 // to change color of a cell (paint)
 function paintCell(evt){
-    //evt.target.classList.add('cell-hover');
     changeBackgroundColor(evt.target, brushColor);
 }
 
@@ -94,12 +91,6 @@ function eraseGridListener(){
     });
 }
 
-
-
-
-gridInit(length);
-
-
 // Everytime keydown is activated the mouse pointer flickers even without hoverToggle, not sure why
 // when stop key is pressed, cells stop being colored. press again to enable drawing
 function stopDrawing(){
@@ -150,11 +141,9 @@ function setLengthFn(){
     document.activeElement.blur()
 }
 
-
-
+gridInit(length);
 stopDrawing();
 eraseGridListener();
-
 setLengthBtn.addEventListener('click', setLengthFn);
 
 
