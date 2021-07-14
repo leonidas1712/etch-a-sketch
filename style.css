@@ -14,14 +14,27 @@ body{
     padding-top:1.5rem;
 }
 
+/*
+Grid is column of rows
+Each row is a div with <length> cells, and we have <length> rows so it's a square grid
+So overall grid is flex-direction:col, each row div is a flex-dir:row for the cells
+Both rows and cells have flex-grow:1 so they can take up all the available space (stretch) and
+all in proportion
+*/
 #sketch-grid{
     border: 1rem groove var(--border-color);
     width:var(--length);
     height:var(--length);
     margin:0 auto;
     background-color: var(--grid-color);
-    display:grid;
     border-radius: 1.8rem;
+    display:flex;
+    flex-direction: column;
+    /*display:grid;*/
+    /* grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16,1fr); */
+    /* grid-template-columns: repeat(auto-fill, minmax(1fr,1fr));
+    grid-template-rows: repeat(auto-fill,minmax(1fr,1fr)); */
 
 }
 
@@ -35,4 +48,11 @@ h3{
 
 .cell{
     border:3px solid black;
+    flex-grow: 1;
+}
+
+.row{
+    flex-grow: 1;
+    display:flex;
+
 }
