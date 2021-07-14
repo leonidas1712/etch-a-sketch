@@ -2,7 +2,7 @@
     --bg-color: #76ebe1;
     --grid-color:rgb(255, 255, 255);
     --border-color: #e6081c;
-    --length:640px;
+    --length:70vh;
     --hover-color: blanchedalmond;
     --default-color:white;
 }
@@ -30,6 +30,7 @@ all in proportion
     margin:0 auto;
     background-color: var(--grid-color);
     border-radius: 1.8rem;
+    border-width: 1.4rem;
 
     display:flex;
     flex-direction: column;
