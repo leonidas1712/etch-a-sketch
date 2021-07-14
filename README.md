@@ -1,5 +1,5 @@
 # etch-a-sketch
-The Odin Project - Etch-a-Sketch(Sketchpad). Created without any frameworks.
+The Odin Project - Etch-a-Sketch(Sketchpad). Created without any frameworks.\
 CodePen Preview: https://codepen.io/SuperJeff/full/OJmWapv
 
 ## Current features
