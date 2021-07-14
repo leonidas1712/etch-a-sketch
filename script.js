@@ -1,6 +1,7 @@
 const grid = document.getElementById("sketch-grid");
 let length = 16;
-const eraseBtn = document.getElementById("erase");
+
+//const eraseBtn = document.getElementById("erase");
 const setLengthBtn = document.getElementById("set-length");
 
 
@@ -44,6 +45,8 @@ function gridInit(length){
     }
 
     addHover();
+
+    setLengthBtn.innerText = `Set grid length: currently ${length}`
 }
 
 // functions to enable/disable hover(mouseover) for cells
@@ -157,8 +160,12 @@ function setLengthFn(){
         deleteGrid();
         length = newLength;
         gridInit(length);
-        document.activeElement.blur()
+        
     }
+
+    // IMPORTANT - space is used to trigger elements, without blur it causes unintended effects 
+    // blur will take away focus from the current element so its not triggered randomly by buttons
+    document.activeElement.blur()
 }
 
 
