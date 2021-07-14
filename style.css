@@ -3,6 +3,7 @@
     --grid-color:rgb(255, 255, 255);
     --border-color: #e6081c;
     --length:640px;
+    --hover-color: blanchedalmond;
 }
 
 *{
@@ -47,8 +48,12 @@ h3{
 }
 
 .cell{
-    border:3px solid black;
+    /*border:3px solid black;*/
     flex-grow: 1;
+}
+
+.cell-hover{
+    background-color: var(--hover-color);
 }
 
 .row{
