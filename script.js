@@ -1,5 +1,5 @@
 const grid = document.getElementById("sketch-grid");
-const length = 64;
+const length = 16;
 const eraseBtn = document.getElementById("erase");
 
 // key to press to temporarily disable drawing
@@ -8,7 +8,7 @@ const STOP_KEY = "Space";
 
 // mouseover event listener
 function cellHover(evt){
-    this.classList.add('cell-hover');
+    evt.target.classList.add('cell-hover');
 }
 
 // add hover listener to all the cells
@@ -26,9 +26,7 @@ function removeHover(){
 
 function createCell(i){
     const div = document.createElement("div");
-    //div.innerText = ((i+1)%10);
     div.classList.add("cell");
-    //div.addEventListener('mouseover', cellHover);
     return div;
 }
 
@@ -48,36 +46,18 @@ function gridInit(length){
 
 // functions to enable/disable hover(mouseover) for cells
 function hoverToggle(enable){
-    const cells = document.querySelectorAll(".cell");
     if(enable){
-        cells.forEach((cell)=>{
-            cell.style.pointerEvents = "";
-        });
+        //grid.style.pointerEvents = "";
+        addHover();
     }
 
     else{
-        cells.forEach((cell) => {
-            cell.style.pointerEvents = "none";
-        });
+        //grid.style.pointerEvents = "none";
+        removeHover();
     }
 }
 
-// Everytime keydown is activated the mouse pointer flickers even without hoverToggle, not sure why
-// when stop key is pressed, cells stop being colored. press again to enable drawing
-function stopDrawing(){
-    let removed = false;
-    document.body.addEventListener('keydown', function(e){
-        if(e.code == STOP_KEY && !removed){
-            hoverToggle(false);
-            removed = true;
-        }
 
-        else{
-            hoverToggle(true);
-            removed = false;
-        }
-    });
-}
 
 // remove cell hover
 function eraseGrid(){
@@ -94,7 +74,6 @@ eraseBtn.addEventListener('click', eraseGrid);
 
 
 gridInit(length);
-stopDrawing();
 
 // let removed = false;
 //     document.body.addEventListener('keydown', function(e){
@@ -110,3 +89,25 @@ stopDrawing();
 //             removed = false;
 //         }
 //     });
+
+// Everytime keydown is activated the mouse pointer flickers even without hoverToggle, not sure why
+// when stop key is pressed, cells stop being colored. press again to enable drawing
+// function stopDrawing(){
+//     let removed = false;
+    
+//     document.body.addEventListener('keydown', function(e){
+//         if(e.code == STOP_KEY){
+//             if(!removed){
+//                 hoverToggle(false);
+//                 removed = true;
+//             }
+
+//             else{
+//                 hoverToggle(true);
+//                 removed = false;
+//             }
+//         }
+
+//         console.log(removed);
+//     });
+// }
