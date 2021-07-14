@@ -13,6 +13,7 @@
 body{
     background-color: var(--bg-color);
     padding-top:1.5rem;
+    font-family: cursive;
 }
 
 /*
@@ -62,3 +63,15 @@ h3{
     display:flex;
 
 }
+
+#settings{
+    display:flex;
+    justify-content: flex-start;
+    border-bottom: 1px solid black;
+    width:calc(var(--length) - 4rem);
+    margin:0 auto;
+    margin-bottom:0.4rem;
+    font-size:1.3rem;
+    
+}
+
