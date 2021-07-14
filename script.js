@@ -1,6 +1,10 @@
 const grid = document.getElementById("sketch-grid");
 let length = 16;
 
+const defaultColor = getComputedStyle(document.body).getPropertyValue("--default-color");
+let brushColor = "hsl(202, 75%, 79%)";
+
+
 //const eraseBtn = document.getElementById("erase");
 const setLengthBtn = document.getElementById("set-length");
 
@@ -8,22 +12,34 @@ const setLengthBtn = document.getElementById("set-length");
 // key to press to temporarily disable drawing
 const STOP_KEY = "Space";
 
+function generateRandomColor(){
+    return "#" + Math.floor(Math.random()*16777215).toString(16);
+}
 
+function changeBackgroundColor(elem, newColor){
+    elem.style.backgroundColor = newColor;
+}
+
+function eraseCell(cell){
+    changeBackgroundColor(cell, defaultColor);
+}
 // mouseover event listener
-function cellHover(evt){
-    evt.target.classList.add('cell-hover');
+// to change color of a cell (paint)
+function paintCell(evt){
+    //evt.target.classList.add('cell-hover');
+    changeBackgroundColor(evt.target, brushColor);
 }
 
 // add hover listener to all the cells
 function addHover(){
     document.querySelectorAll(".cell").forEach(cell => {
-        cell.addEventListener('mouseover', cellHover);
+        cell.addEventListener('mouseover', paintCell);
     });
 }
 
 function removeHover(){
     document.querySelectorAll(".cell").forEach(cell => {
-        cell.removeEventListener('mouseover', cellHover);
+        cell.removeEventListener('mouseover', paintCell);
     });
 }
 
@@ -53,12 +69,10 @@ function gridInit(length){
 function hoverToggle(enable){
     if(enable){
         grid.style.pointerEvents = "";
-        //addHover();
     }
 
     else{
         grid.style.pointerEvents = "none";
-        //removeHover();
     }
 }
 
@@ -67,9 +81,7 @@ function hoverToggle(enable){
 // remove cell hover
 function eraseGrid(){
     document.querySelectorAll('.cell').forEach((cell)=>{
-        if(cell.classList.contains('cell-hover')){
-            cell.classList.remove('cell-hover');
-        }
+        eraseCell(cell);
     });
 }
 
@@ -87,44 +99,15 @@ function eraseGridListener(){
 
 gridInit(length);
 
-// let removed = false;
-//     document.body.addEventListener('keydown', function(e){
-//         if (e.code === HOLD_KEY && !removed){
-//             removeHover();
-//             removed = true;
-//         }
-//     });
-
-//     document.body.addEventListener('keyup', function(e){
-//         if(e.code == HOLD_KEY && removed){
-//             addHover();
-//             removed = false;
-//         }
-//     });
 
 // Everytime keydown is activated the mouse pointer flickers even without hoverToggle, not sure why
 // when stop key is pressed, cells stop being colored. press again to enable drawing
 function stopDrawing(){
     let removed = false;
 
-    // pause.addEventListener('click', function(){
-    //     if(!removed){
-    //         hoverToggle(false);
-    //         removed = true;
-    //     }
-    
-    //     else{
-    //         hoverToggle(true);
-    //         removed = false;
-    //     }
-
-    //     console.log(removed);
-    // });
-
     document.addEventListener('keydown', function(e){
         if(e.repeat){return;}
         const key = e.code;
-        console.log(e.code);
 
         if(key === STOP_KEY){
             if(!removed){
@@ -137,7 +120,6 @@ function stopDrawing(){
                 removed = false;
             }
 
-            console.log(removed);
         }
     });
 }
