@@ -1,7 +1,7 @@
 const grid = document.getElementById("sketch-grid");
-const length = 16;
+let length = 16;
 const eraseBtn = document.getElementById("erase");
-const pause = document.getElementById("pause");
+const setLengthBtn = document.getElementById("set-length");
 
 
 // key to press to temporarily disable drawing
@@ -70,7 +70,6 @@ function eraseGrid(){
     });
 }
 
-//eraseBtn.addEventListener('click', eraseGrid);
 
 function eraseGridListener(){
     document.body.addEventListener('keydown', function(e){
@@ -140,6 +139,33 @@ function stopDrawing(){
     });
 }
 
+// instead of just removing cell hover, delete the elements within sketch-grid completely
+function deleteGrid(){
+    grid.innerHTML = '';
+}
+
+function setLengthFn(){
+    const min = 2;
+    const max = 100;
+    let newLength = Number(prompt(`What do you want the length of the grid to be? Enter a number between ${min} and ${max} inclusive.\nCurrent length: ${length}`));
+    
+    if(isNaN(newLength) || newLength < min || newLength > max){
+        alert("Invalid value, please try again");
+    }
+
+    else{
+        deleteGrid();
+        length = newLength;
+        gridInit(length);
+        document.activeElement.blur()
+    }
+}
+
+
 
 stopDrawing();
 eraseGridListener();
+
+setLengthBtn.addEventListener('click', setLengthFn);
+
+
