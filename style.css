@@ -20,6 +20,8 @@ body{
     height:var(--length);
     margin:0 auto;
     background-color: var(--grid-color);
+    display:grid;
+    border-radius: 1.8rem;
 
 }
 
@@ -29,4 +31,8 @@ h3{
     font-family: 'Festive', cursive;
     font-size:2rem;
     background-color: var(--bg-color);
+}
+
+.cell{
+    border:3px solid black;
 }
