@@ -1,6 +1,8 @@
 const grid = document.getElementById("sketch-grid");
 const length = 16;
 const eraseBtn = document.getElementById("erase");
+const pause = document.getElementById("pause");
+
 
 // key to press to temporarily disable drawing
 const STOP_KEY = "Space";
@@ -47,13 +49,13 @@ function gridInit(length){
 // functions to enable/disable hover(mouseover) for cells
 function hoverToggle(enable){
     if(enable){
-        //grid.style.pointerEvents = "";
-        addHover();
+        grid.style.pointerEvents = "";
+        //addHover();
     }
 
     else{
-        //grid.style.pointerEvents = "none";
-        removeHover();
+        grid.style.pointerEvents = "none";
+        //removeHover();
     }
 }
 
@@ -68,7 +70,15 @@ function eraseGrid(){
     });
 }
 
-eraseBtn.addEventListener('click', eraseGrid);
+//eraseBtn.addEventListener('click', eraseGrid);
+
+function eraseGridListener(){
+    document.body.addEventListener('keydown', function(e){
+        if(e.code == 'Escape'){
+            eraseGrid();
+        }
+    });
+}
 
 
 
@@ -92,22 +102,44 @@ gridInit(length);
 
 // Everytime keydown is activated the mouse pointer flickers even without hoverToggle, not sure why
 // when stop key is pressed, cells stop being colored. press again to enable drawing
-// function stopDrawing(){
-//     let removed = false;
+function stopDrawing(){
+    let removed = false;
+
+    // pause.addEventListener('click', function(){
+    //     if(!removed){
+    //         hoverToggle(false);
+    //         removed = true;
+    //     }
     
-//     document.body.addEventListener('keydown', function(e){
-//         if(e.code == STOP_KEY){
-//             if(!removed){
-//                 hoverToggle(false);
-//                 removed = true;
-//             }
+    //     else{
+    //         hoverToggle(true);
+    //         removed = false;
+    //     }
 
-//             else{
-//                 hoverToggle(true);
-//                 removed = false;
-//             }
-//         }
+    //     console.log(removed);
+    // });
 
-//         console.log(removed);
-//     });
-// }
+    document.addEventListener('keydown', function(e){
+        if(e.repeat){return;}
+        const key = e.code;
+        console.log(e.code);
+
+        if(key === STOP_KEY){
+            if(!removed){
+                hoverToggle(false);
+                removed = true;
+            }
+
+            else{
+                hoverToggle(true);
+                removed = false;
+            }
+
+            console.log(removed);
+        }
+    });
+}
+
+
+stopDrawing();
+eraseGridListener();
