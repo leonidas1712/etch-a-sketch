@@ -1,9 +1,32 @@
 :root{
-    --bg-color: #CBD6D6;
-    --border-color: #826364;
+    --bg-color: #76ebe1;
+    --grid-color:rgb(255, 255, 255);
+    --border-color: #e6081c;
+    --length:640px;
+}
+
+*{
+    box-sizing: border-box;
 }
 
 body{
     background-color: var(--bg-color);
-    
+    padding-top:1.5rem;
+}
+
+#sketch-grid{
+    border: 1rem groove var(--border-color);
+    width:var(--length);
+    height:var(--length);
+    margin:0 auto;
+    background-color: var(--grid-color);
+
+}
+
+h3{
+    text-align: center;
+    margin: 0 auto;
+    font-family: 'Festive', cursive;
+    font-size:2rem;
+    background-color: var(--bg-color);
 }
